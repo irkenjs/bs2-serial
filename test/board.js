@@ -1,29 +1,109 @@
 'use strict';
 
-var lab = exports.lab = require('lab').script();
-var code = require('code');
+var expect = require('expect');
 
-var Board = require('../lib/board');
+var Irken = require('irken');
 
-var hex = new Buffer([0xFF, 0x00, 0x00, 0x00, 0x00, 0x30, 0xA0, 0xC7, 0x92, 0x66, 0x48, 0x13, 0x84, 0x4C, 0x35, 0x07, 0xC0, 0x4B]);
+var plugins = [
+{
+  register: require('../')
+}
+];
 
-var path = '/dev/tty.usbserial-A502BMUQ';
+describe('bs2-serial', function(){
 
-lab.experiment('Board', function(){
+  var app;
 
-  var board;
-
-  lab.beforeEach(function(done){
-    board = new Board();
+  beforeEach(function(done){
+    app = new Irken();
     done();
   });
 
-  lab.test('#bootload', function(done){
-    board.bootload({hex: hex, path: path}, function(error, result){
-      code.expect(error).to.not.exist();
-      code.expect(result).to.deep.equal({name: 'BS2', version: '1.0'});
+  it('#registers plugin and exposes board in default namespace', function(done){
+
+    app.register(plugins, function(err){
+      expect(err).toNotExist();
+      expect(app.bs2serial).toExist();
       done();
     });
   });
 
+  it('#registers plugin and exposes board in optional namespace', function(done){
+
+    var plugins = [
+    {
+      register: require('../'),
+      options: {namespace: 'tacos'}
+    }
+    ];
+
+    app.register(plugins, function(err){
+      expect(app.tacos).toExist();
+      done();
+    });
+  });
+
+  it('#bootload errors on no path', function(done){
+
+    var options = {};
+
+    app.register(plugins, function(err){
+      app.bs2serial.bootload({}, function(err){
+        expect(err).toExist();
+        expect(err.message).toEqual('Options error: no path');
+        done();
+      });
+    });
+  });
+
+  it('#bootload errors on no program data', function(done){
+
+    var options = {
+      path: '/dev/tacos',
+    };
+
+    app.register(plugins, function(err){
+      app.bs2serial.bootload(options, function(err){
+        expect(err).toExist();
+        expect(err.message).toEqual('Options error: no program data');
+        done();
+      });
+    });
+  });
+
+  it('#bootload errors on no board', function(done){
+
+    var options = {
+      path: '/dev/tacos',
+      memory: {
+        data: 'filthy human binary'
+      }
+    };
+
+    app.register(plugins, function(err){
+      app.bs2serial.bootload(options, function(err){
+        expect(err).toExist();
+        expect(err.message).toEqual('Options error: no board');
+        done();
+      });
+    });
+  });
+
+  it('#getrevisions returns an object', function(done){
+
+    var options = {
+      path: '/dev/tacos',
+      memory: {
+        data: 'filthy human binary'
+      }
+    };
+
+    app.register(plugins, function(err){
+      app.bs2serial.getRevisions(function(err, revisions){
+        expect(err).toNotExist();
+        expect(revisions).toBeAn('object');
+        done();
+      });
+    });
+  });
 });

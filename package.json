@@ -4,7 +4,7 @@
   "description": "Irken plugin exposing bs2 board via serial",
   "main": "index.js",
   "scripts": {
-    "test": "lab -cv"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,9 @@
   },
   "homepage": "https://github.com/jacobrosenthal/bs2-serial",
   "devDependencies": {
-    "code": "^1.3.0",
-    "lab": "^5.4.0",
+    "expect": "^1.6.0",
+    "mocha": "^2.2.1",
+    "irken": "^0.3.0",
     "serialport": "jacobrosenthal/node-serialport#update"
   },
   "dependencies": {
