@@ -26,7 +26,7 @@
     "serialport": "jacobrosenthal/node-serialport#update"
   },
   "dependencies": {
-    "bs2-programmer": "^0.1.0",
+    "bs2-programmer": "^0.1.1",
     "when": "^3.7.2"
   }
 }
