@@ -26,7 +26,8 @@
     "serialport": "jacobrosenthal/node-serialport#update"
   },
   "dependencies": {
+    "bluebird": "^2.9.14",
     "bs2-programmer": "^0.1.1",
-    "when": "^3.7.2"
+    "lodash": "^3.5.0"
   }
 }

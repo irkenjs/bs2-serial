@@ -1,12 +1,10 @@
 'use strict';
 
-var Board = require('./lib/board');
+var board = require('./lib/board');
 
 function bs2serial(app, opts, cb){
 
   var namespace = opts.namespace || 'bs2serial';
-
-  var board = new Board();
 
   app.expose(namespace, board);
 
