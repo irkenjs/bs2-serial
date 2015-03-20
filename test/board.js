@@ -14,6 +14,9 @@ describe('bs2-serial', function(){
 
     plugins = [
       {
+        register: require('conveyor')
+      },
+      {
         register: require('../')
       }
     ];
@@ -21,30 +24,14 @@ describe('bs2-serial', function(){
     done();
   });
 
-  it('#registers plugin and exposes board in default namespace', function(done){
+  it('#registers boards to conveyor', function(done){
 
-    app.register(plugins, function(err){
-      expect(err).toNotExist();
-      expect(app.bs2serial).toExist();
-      done();
-    });
-  });
-
-  it('#registers plugin and exposes board in optional namespace', function(done){
-
-    plugins = [
-      {
-        register: require('../'),
-        options: {
-          namespace: 'tacos'
-        }
-      }
-    ];
-
-    app.register(plugins, function(err){
-      expect(err).toNotExist();
-      expect(app.tacos).toExist();
-      done();
+    app.register(plugins, function(){
+      app.conveyor.listBoards(function(err, boards){
+        expect(err).toNotExist();
+        expect(boards).toExist();
+        done();
+      });
     });
   });
 
@@ -53,12 +40,14 @@ describe('bs2-serial', function(){
     var options = {};
 
     app.register(plugins, function(){
-      function invalid(){
-        app.bs2serial.bootload(options);
-      }
+      app.conveyor.getBoard('BS2', function(err, board){
+        function invalid(){
+          board.bootload(options);
+        }
 
-      expect(invalid).toThrow(/Options error: no path/);
-      done();
+        expect(invalid).toThrow(/Options error: no path/);
+        done();
+      });
     });
   });
 
@@ -69,40 +58,12 @@ describe('bs2-serial', function(){
     };
 
     app.register(plugins, function(){
-      function invalid(){
-        app.bs2serial.bootload(options);
-      }
+      app.conveyor.getBoard('BS2', function(err, board){
+        function invalid(){
+          board.bootload(options);
+        }
 
-      expect(invalid).toThrow(/Options error: no program data/);
-      done();
-    });
-  });
-
-  it('#bootload errors on no board', function(done){
-
-    var options = {
-      path: '/dev/tacos',
-      memory: {
-        data: 'filthy human binary'
-      }
-    };
-
-    app.register(plugins, function(){
-      function invalid(){
-        app.bs2serial.bootload(options);
-      }
-
-      expect(invalid).toThrow(/Options error: no board/);
-      done();
-    });
-  });
-
-  it('#getRevisions returns an object', function(done){
-
-    app.register(plugins, function(){
-      app.bs2serial.getRevisions(function(err, revisions){
-        expect(err).toNotExist();
-        expect(revisions).toBeAn('object');
+        expect(invalid).toThrow(/Options error: no program data/);
         done();
       });
     });

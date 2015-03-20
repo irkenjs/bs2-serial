@@ -1,12 +1,20 @@
 'use strict';
 
-var board = require('./lib/board');
+var map = require('lodash.map');
+var bs2 = require('bs2-programmer');
+
+var Board = require('./lib/board');
 
 function bs2serial(app, opts, cb){
 
-  var namespace = opts.namespace || 'bs2serial';
+  if(!app.conveyor){
+    throw new Error('Register error: conveyor not found in app namespace');
+  }
 
-  app.expose(namespace, board);
+  map(bs2.revisions, function(revision) {
+    var board = new Board(revision);
+    app.conveyor.addBoard(revision.name, board);
+  });
 
   cb();
 }

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/jacobrosenthal/bs2-serial",
   "devDependencies": {
+    "conveyor": "git://github.com/jacobrosenthal/conveyor",
     "expect": "^1.6.0",
     "mocha": "^2.2.1",
     "irken": "^0.3.0",
@@ -28,6 +29,9 @@
   "dependencies": {
     "bluebird": "^2.9.14",
     "bs2-programmer": "^0.1.1",
-    "lodash": "^3.5.0"
+    "bs2-serialport": "jacobrosenthal/bs2-serialport",
+    "lodash": "^3.5.0",
+    "lodash.map": "^3.0.0",
+    "pbasic-tokenizer": "parallaxinc/PBASIC-Tokenizer#emscripten"
   }
 }
