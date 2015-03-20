@@ -22,10 +22,11 @@
   "devDependencies": {
     "expect": "^1.6.0",
     "mocha": "^2.2.1",
-    "irken": "^0.3.0",
-    "serialport": "jacobrosenthal/node-serialport#update"
+    "irken": "^0.3.0"
   },
   "dependencies": {
+    "bs2-serialport": "jacobrosenthal/bs2-serialport",
+    "pbasic-tokenizer": "parallaxinc/PBASIC-Tokenizer#emscripten",
     "bluebird": "^2.9.14",
     "bs2-programmer": "^0.1.1",
     "lodash": "^3.5.0"
