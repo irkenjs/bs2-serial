@@ -27,11 +27,11 @@ describe('bs2-serial', function(){
   it('#registers boards to conveyor', function(done){
 
     app.register(plugins, function(){
-      app.conveyor.listBoards(function(err, boards){
-        expect(err).toNotExist();
-        expect(boards).toExist();
-        done();
-      });
+
+      var boards = app.conveyor.listBoards();
+      expect(boards).toExist();
+      expect(boards.BS2).toExist();
+      done();
     });
   });
 
@@ -40,14 +40,13 @@ describe('bs2-serial', function(){
     var options = {};
 
     app.register(plugins, function(){
-      app.conveyor.getBoard('BS2', function(err, board){
-        function invalid(){
-          board.bootload(options);
-        }
 
-        expect(invalid).toThrow(/Options error: no path/);
-        done();
-      });
+      var board = app.conveyor.getBoard('BS2');
+      function invalid(){
+        board.bootload(options);
+      }
+      expect(invalid).toThrow(/Options error: no path/);
+      done();
     });
   });
 
@@ -58,14 +57,13 @@ describe('bs2-serial', function(){
     };
 
     app.register(plugins, function(){
-      app.conveyor.getBoard('BS2', function(err, board){
-        function invalid(){
-          board.bootload(options);
-        }
 
-        expect(invalid).toThrow(/Options error: no program data/);
-        done();
-      });
+      var board = app.conveyor.getBoard('BS2');
+      function invalid(){
+        board.bootload(options);
+      }
+      expect(invalid).toThrow(/Options error: no program data/);
+      done();
     });
   });
 });
