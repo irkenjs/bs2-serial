@@ -29,7 +29,6 @@
   "dependencies": {
     "bluebird": "^2.9.14",
     "bs2-programmer": "^0.1.1",
-    "bs2-serialport": "jacobrosenthal/bs2-serialport",
     "lodash": "^3.5.0",
     "lodash.map": "^3.0.0",
     "pbasic-tokenizer": "parallaxinc/PBASIC-Tokenizer#emscripten"
