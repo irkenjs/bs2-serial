@@ -29,6 +29,6 @@
     "bluebird": "^2.9.14",
     "bs2-programmer": "^0.1.1",
     "lodash": "^3.5.0",
-    "pbasic-tokenizer": "parallaxinc/PBASIC-Tokenizer#emscripten"
+    "pbasic-tokenizer": "^0.1.0"
   }
 }
