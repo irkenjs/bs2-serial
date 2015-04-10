@@ -48,13 +48,13 @@ describe('bs2-serial', function(){
     });
   });
 
-  it('#bootload throws on no path', function(done){
+  it('constructor throws on no path', function(done){
 
     var options = {};
 
     app.register(plugins, function(){
       function invalid(){
-        app.bs2serial.bootload(options);
+        new app.bs2serial(options);
       }
 
       expect(invalid).toThrow(/Options error: no path/);
@@ -62,7 +62,7 @@ describe('bs2-serial', function(){
     });
   });
 
-  it('#bootload throws on no program data', function(done){
+  it('constructor errors on no revision', function(done){
 
     var options = {
       path: '/dev/tacos'
@@ -70,7 +70,27 @@ describe('bs2-serial', function(){
 
     app.register(plugins, function(){
       function invalid(){
-        app.bs2serial.bootload(options);
+        new app.bs2serial(options);
+      }
+
+      expect(invalid).toThrow(/Options error: no revision/);
+      done();
+    });
+  });
+
+  it('#bootload throws on no program data', function(done){
+
+    var options = {
+      path: '/dev/tacos',
+      revision: 'bs2'
+    };
+
+    var memory = {};
+
+    app.register(plugins, function(){
+      function invalid(){
+        var board = new app.bs2serial(options);
+        board.bootload(memory);
       }
 
       expect(invalid).toThrow(/Options error: no program data/);
@@ -78,29 +98,18 @@ describe('bs2-serial', function(){
     });
   });
 
-  it('#bootload errors on no board', function(done){
+  it('#getRevisions returns an object', function(done){
 
     var options = {
       path: '/dev/tacos',
-      memory: {
-        data: 'filthy human binary'
-      }
+      revision: 'bs2'
     };
 
     app.register(plugins, function(){
-      function invalid(){
-        app.bs2serial.bootload(options);
-      }
-
-      expect(invalid).toThrow(/Options error: no board/);
-      done();
-    });
-  });
-
-  it('#getRevisions returns an object', function(done){
-
-    app.register(plugins, function(){
-      app.bs2serial.getRevisions(function(err, revisions){
+      // TODO: it doesn't make sense to getRevisions when you defined
+      // one in the options to the constructor
+      var board = new app.bs2serial(options);
+      board.getRevisions(function(err, revisions){
         expect(err).toNotExist();
         expect(revisions).toBeAn('object');
         done();
