@@ -100,19 +100,23 @@ describe('bs2-serial', function(){
 
   it('#getRevisions returns an object', function(done){
 
-    var options = {
-      path: '/dev/tacos',
-      revision: 'bs2'
-    };
-
     app.register(plugins, function(){
-      // TODO: it doesn't make sense to getRevisions when you defined
-      // one in the options to the constructor
-      var board = new app.bs2serial(options);
-      board.getRevisions(function(err, revisions){
-        expect(err).toNotExist();
-        expect(revisions).toBeAn('object');
-        done();
+      expect(app.bs2serial.getRevisions()).toBeAn('object');
+      done();
+    });
+  });
+
+  it('#search processes port list and returns any found boards', function(done){
+    this.timeout(30000);
+
+    app.register(plugins, function(err){
+      expect(err).toNotExist();
+      expect(app.bs2serial).toExist();
+      expect(app.bs2serial.search).toExist();
+      app.bs2serial.search(['/dev/tty.usbserial-A502BMX2', '/dev/zero'], function(error, results){
+        expect(error).toNotExist();
+        expect(results).toExist();
+        done(error);
       });
     });
   });
