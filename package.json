@@ -29,7 +29,7 @@
     "bs2-programmer": "^2.3.0",
     "bs2-serial-protocol": "^0.4.0",
     "lodash": "^3.5.0",
-    "pbasic-tokenizer": "^0.1.0",
+    "pbasic-tokenizer": "^0.2.0",
     "through2": "^0.6.5"
   }
 }
