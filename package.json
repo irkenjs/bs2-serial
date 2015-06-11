@@ -1,6 +1,6 @@
 {
   "name": "bs2-serial",
-  "version": "0.7.3",
+  "version": "0.8.0",
   "description": "Irken plugin exposing bs2 board via serial",
   "main": "index.js",
   "scripts": {
