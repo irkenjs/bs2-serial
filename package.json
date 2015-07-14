@@ -30,6 +30,7 @@
     "bs2-serial-protocol": "^0.6.0",
     "lodash": "^3.5.0",
     "pbasic-tokenizer": "^0.3.0",
+    "re-emitter": "^1.1.1",
     "through2": "^0.6.5"
   }
 }
