@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "bluebird": "^2.9.14",
-    "bs2-programmer": "^2.3.0",
+    "bs2-programmer": "^2.3.2",
     "bs2-serial-protocol": "^0.8.0",
     "lodash": "^3.5.0",
     "pbasic-tokenizer": "^0.3.0",
