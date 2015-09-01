@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "bluebird": "^2.9.14",
-    "bs2-programmer": "git://github.com/irkenjs/bs2-programmer#experimental-break",
+    "bs2-programmer": "^2.3.2",
     "bs2-serial-protocol": "git://github.com/irkenjs/bs2-serialport#experimental-break",
     "lodash": "^3.5.0",
     "pbasic-tokenizer": "^0.3.0",
