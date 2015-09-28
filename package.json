@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jacobrosenthal/bs2-serial"
+    "url": "https://github.com/irkenjs/bs2-serial"
   },
   "keywords": [
     "irken"
@@ -16,9 +16,9 @@
   "author": "Jacob Rosenthal",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jacobrosenthal/bs2-serial/issues"
+    "url": "https://github.com/irkenjs/bs2-serial/issues"
   },
-  "homepage": "https://github.com/jacobrosenthal/bs2-serial",
+  "homepage": "https://github.com/irkenjs/bs2-serial",
   "devDependencies": {
     "expect": "^1.6.0",
     "mocha": "^2.2.1",
@@ -27,7 +27,7 @@
   "dependencies": {
     "bluebird": "^2.9.14",
     "bs2-programmer": "^2.3.2",
-    "bs2-serial-protocol": "^0.9.0",
+    "bs2-serial-protocol": "^0.10.0",
     "lodash": "^3.5.0",
     "pbasic-tokenizer": "^0.3.0",
     "re-emitter": "^1.1.1",
